@@ -81,10 +81,10 @@ app.get('/auth/account', auth.useAuth, auth.account);
 app.get('/pbl', auth.useAuth, pblList.list);
 
 // project
-app.get('/projects', project.index);
-app.get('/projects/:name', project.loadProject, project.detail);
-app.get('/projects/new', project.new);
-app.post('/projects/new', project.create);
+app.get('/projects', auth.useAuth, project.index);
+// app.get('/projects/:name', project.loadProject, project.detail);
+app.get('/projects/new', auth.useAuth, project.new);
+app.post('/projects/new', auth.useAuth, project.create);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
