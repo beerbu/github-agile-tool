@@ -8,6 +8,7 @@ var express = require('express')
   , user = require('./routes/user')
   , auth = require('./routes/auth')
   , pblList = require('./routes/pblList')
+  , project = require('./routes/project')
   , http = require('http')
   , path = require('path');
 
@@ -81,7 +82,7 @@ app.get('/pbl', auth.useAuth, pblList.list);
 
 // project
 app.get('/projects', project.index);
-app.get('/projects/:name', loadProject, project.detail);
+app.get('/projects/:name', project.loadProject, project.detail);
 app.get('/projects/new', project.new);
 app.post('/projects/new', project.create);
 
