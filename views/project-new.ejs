@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <form method="post" action="/projects/new">
+      <select name="reponame">
+        <% for(var i = 0; i < repos.length; i++) {%>
+          <option value="<%= repos[i].name %>"><%= repos[i].name %></option>
+        <% } %>
+      </select>
+      <input type="submit" value="プロジェクトの作成">
+    </form>
+  </body>
+</html>

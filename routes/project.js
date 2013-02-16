@@ -3,37 +3,23 @@
  * project controller
  */
 var https = require('https');
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://beerbu:kuzu@linus.mongohq.com:10053/github-ajile-tool');
-var Schema = mongoose.Schema;
-var ObjectId = Schema.ObjectId;
-var Project = new Schema({
-    id        : ObjectId,
-    name      : String
-});
-
- // You would fetch your user from the db
-exports.loadProject = function(req, res, next) {
-  var proj = proj[req.params.name];
-  if (proj) {
-    req.proj = proj;
-    next();
-  }
-  else {
-    next(new Error('Failed to load project ' + req.params.name));
-  }
-};
+var Project = require('../models/project.js');
 
 exports.index = function(req, res) {
-  res.send("respond with a resource");
+  var username = req.session.passport.user.username;
+  Project.find({'username': username}, function(err, projects) {
+    if (err) console.log(err);
+
+    res.render('project-index', { 'projects' : projects });
+  });
 };
 
 exports.new = function(req, res) {
-    var user = req.session.passport.user.username;
+    var username = req.session.passport.user.username;
     var getAllUserRepos = {
         host: 'api.github.com',
         port: '443',
-        path: '/users/' + user + '/repos',
+        path: '/users/' + username + '/repos',
         method: "GET",
         headers: {
             'Content-Type': 'application/json'
@@ -50,22 +36,36 @@ exports.new = function(req, res) {
 
         result.on('end', function() {
             var repos = JSON.parse(output);
-            res.render('project-index', { 'repos' : repos });
+            res.render('project-new', { 'repos' : repos });
         });
     });
 
     request.on('error', function(err) {
         console.log(err);
-        //res.send('error: ' + err.message);
     });
 
     request.end();
-    // res.send("respond with a resource");
 };
 
 exports.create = function(req, res) {
-  var name = req.body.repo;
-  res.render('project-created', { 'name' : name });
+  var username = req.session.passport.user.username;
+  var reponame = req.body.reponame;
+
+  Project.find({'username': username, 'reponame': reponame}, function(err, projects) {
+    if (err) console.log(err);
+
+    if (projects.length === 0) {
+      var project = new Project({'username': username, 'reponame': reponame});
+      project.save(function(err) {
+          console.log(err);
+      });
+
+      res.render('project-created', { 'name' : reponame });
+    }
+    else {
+      res.redirect('/projects');
+    }
+  });
 };
 
 exports.detail = function(req, res) {
