@@ -16,13 +16,15 @@ exports.index = function(req, res) {
 
 exports.new = function(req, res) {
     var username = req.session.passport.user.username;
+    var accessToken = req.session.passport.user.accessToken;
     var getAllUserRepos = {
         host: 'api.github.com',
         port: '443',
         path: '/users/' + username + '/repos',
         method: "GET",
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'bearer ' + accessToken
         }
     };
 
