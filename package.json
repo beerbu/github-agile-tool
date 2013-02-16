@@ -1,0 +1,21 @@
+{
+  "name": "github-agile-tool",
+  "version": "0.0.0",
+  "description": "ERROR: No README.md file found!",
+  "main": "server.js",
+  "dependencies": {
+    "matador": "~1.1.22-beta",
+    "passport-github": "~0.1.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/beerbu/github-agile-tool.git"
+  },
+  "author": "",
+  "license": "BSD"
+}
