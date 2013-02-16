@@ -8,5 +8,15 @@
   "dependencies": {
     "express": "3.1.0",
     "jade": "*"
-  }
+  },
+  "readmeFilename": "README.md",
+  "description": "github-agile-tool =================",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/beerbu/github-agile-tool.git"
+  },
+  "author": "",
+  "license": "BSD"
 }
