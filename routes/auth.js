@@ -8,7 +8,8 @@ exports.callback = function(req, res) {
 
 exports.account = function(req, res) {
     console.log(req.session);
-    res.render('account',{title:'account info'});
+    var session = require('passport').session;
+    res.render('account',{title:'account info', session: session});
 }
 
 //認証ありページのミドルウェア
