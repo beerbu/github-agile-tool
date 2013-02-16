@@ -1,7 +1,38 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+    <title>{{title}}</title>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.css' type='text/css'>
+    <link rel='stylesheet' href='/stylesheets/main.css' type='text/css'>
+    <script type="text/javascript" src='/js/jquery-1.9.1.min.js'></script>
+    <script type="text/javascript" src='/js/jquery-ui-1.10.1.custom.min.js'></script>
+    <script type="text/javascript" src="./js/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src='/js/bootstrap.js'></script>
+    <script type='text/javascript'>
+      !function () {
+        window.console = ('console' in window) ? console : {
+          log: function () {}
+        }
+        var one = 'one'
+          , two = 'two'
+          , three = function (msg) {
+            console.log(msg)
+          }
+        console.log([one, two].join(' '))
+        three('hello there sir')
+      }()
+    </script>
   </head>
   <body>
+  <div class="container">
+    <header>
+      <h1>Github ajile tool</h1>
+      <div class="navbar">
+        <nav class="navbar-inner">
+          <ul class="nav">
+            <li class="active"><a href="#">PBL</a></li>
+            <li><a href="#">BurnDown</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>

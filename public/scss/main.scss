@@ -1,0 +1,74 @@
+@mixin vendor-prefix($name, $argument) {
+  #{$name}: $argument;
+  -webkit-#{$name}: $argument;
+  -ms-#{$name}: $argument;
+  -moz-#{$name}: $argument;
+  -o-#{$name}: $argument;
+}
+
+/* newIssue ========== */
+#newIssue {
+	.heading {
+		font-size: 20px;
+		line-height: 1;
+
+	}
+	form {
+		margin-bottom: 0;
+	}
+	.titleWr {
+		display: -webkit-box;
+		-webkit-box-orient: horizontal;
+
+		input {
+			display: -webkit-box;
+			-webkit-box-flex: 1;
+			margin-right: 10px;
+			font-weight: bold;
+		}
+	}
+	.btn {
+		margin-bottom: 10px;
+	}
+	.dropdown-menu {
+		input {
+			display: none;
+		}
+	}
+	.formSubmit {
+		text-align: right;
+	}
+}
+
+/* #issueList ========== */
+#issueList {
+	thead {
+		background: #F7F7F9;
+		background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#F2F2F2));
+		background-image: -webkit-linear-gradient(white, #F2F2F2);
+		background-image: linear-gradient(white, #F2F2F2);
+	}
+	.active {
+		background-image: -webkit-linear-gradient(top, #F2F2F2, white);
+background-image: -o-linear-gradient(top, #F2F2F2, white);
+background-image: linear-gradient(to bottom, #F2F2F2, white);
+	}
+	.assignee {
+		img {
+			width: 20px;
+			height: 20px;
+		}
+	}
+	.point {
+		padding: 0;
+
+		select {
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			border: none;
+			background: #fff;
+			border-radius: 0;
+		}
+	}
+}

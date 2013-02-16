@@ -1,0 +1,43 @@
+/* newIssue ========== */
+#newIssue .heading {
+  font-size: 20px;
+  line-height: 1; }
+#newIssue form {
+  margin-bottom: 0; }
+#newIssue .titleWr {
+  display: -webkit-box;
+  -webkit-box-orient: horizontal; }
+  #newIssue .titleWr input {
+    display: -webkit-box;
+    -webkit-box-flex: 1;
+    margin-right: 10px;
+    font-weight: bold; }
+#newIssue .btn {
+  margin-bottom: 10px; }
+#newIssue .dropdown-menu input {
+  display: none; }
+#newIssue .formSubmit {
+  text-align: right; }
+
+/* #issueList ========== */
+#issueList thead {
+  background: #F7F7F9;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#f2f2f2));
+  background-image: -webkit-linear-gradient(white, #f2f2f2);
+  background-image: linear-gradient(white, #f2f2f2); }
+#issueList .active {
+  background-image: -webkit-linear-gradient(top, #f2f2f2, white);
+  background-image: -o-linear-gradient(top, #f2f2f2, white);
+  background-image: linear-gradient(to bottom, #f2f2f2, white); }
+#issueList .assignee img {
+  width: 20px;
+  height: 20px; }
+#issueList .point {
+  padding: 0; }
+  #issueList .point select {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border: none;
+    background: #fff;
+    border-radius: 0; }
