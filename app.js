@@ -31,7 +31,7 @@ passport.use(new GitHubStrategy({
   function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
     process.nextTick(function () {
-      
+
       // To keep the example simple, the user's GitHub profile is returned to
       // represent the logged-in user.  In a typical application, you would want
       // to associate the GitHub account with a user record in your database,
@@ -78,6 +78,12 @@ app.get('/auth/account', auth.useAuth, auth.account);
 
 //pbl一覧
 app.get('/pbl', auth.useAuth, pblList.list);
+
+// project
+app.get('/projects', project.index);
+app.get('/projects/:name', loadProject, project.detail);
+app.get('/projects/new', project.new);
+app.post('/projects/new', project.create);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
