@@ -2,7 +2,7 @@
 /*
  * project controller
  */
-var http = require('http');
+var https = require('https');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://beerbu:kuzu@linus.mongohq.com:10053/github-ajile-tool');
 var Schema = mongoose.Schema;
@@ -24,17 +24,15 @@ exports.loadProject = function(req, res, next) {
   }
 };
 
-
 exports.index = function(req, res) {
   res.send("respond with a resource");
 };
 
 exports.new = function(req, res) {
-    // TODO
-    var user = req.session.passport.user;
+    var user = req.session.passport.user.username;
     var getAllUserRepos = {
         host: 'api.github.com',
-        port: '80',
+        port: '443',
         path: '/users/' + user + '/repos',
         method: "GET",
         headers: {
@@ -42,7 +40,7 @@ exports.new = function(req, res) {
         }
     };
 
-    var request = http.request(getAllUserRepos, function(result) {
+    var request = https.request(getAllUserRepos, function(result) {
         var output = '';
         result.setEncoding('utf8');
 
@@ -52,22 +50,22 @@ exports.new = function(req, res) {
 
         result.on('end', function() {
             var repos = JSON.parse(output);
-            res(resulst.statusCode, repos);
-            res.render('index', { 'repos' : repos });
+            res.render('project-index', { 'repos' : repos });
         });
     });
 
-    reqest.on('error', function(err) {
+    request.on('error', function(err) {
         console.log(err);
         //res.send('error: ' + err.message);
     });
 
-    reqest.end();
+    request.end();
     // res.send("respond with a resource");
 };
 
 exports.create = function(req, res) {
-  res.send("respond with a resource");
+  var name = req.body.repo;
+  res.render('project-created', { 'name' : name });
 };
 
 exports.detail = function(req, res) {
