@@ -12,7 +12,7 @@ exports.save = function(req, res) {
     var postStr = JSON.stringify(post_data);
     console.log(postStr);
     var headers = {'Content-Type': 'application/json', 'Content-Length': postStr.length, 'Authorization': 'token ' + token};
-    var options = {host: 'api.github.com', port: 443, path: '/repos/' + req.session.passport.user.username + '/' + req.body.project + '/issues', method: 'POST', headers: headers};
+    var options = {host: 'api.github.com', port: 443, path: '/repos/' + req.body.user + '/' + req.body.project + '/issues', method: 'POST', headers: headers};
 	var http = require('https');
 	var request = http.request(options, function(response) {
         response.setEncoding('utf-8');
