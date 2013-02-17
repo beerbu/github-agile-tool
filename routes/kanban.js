@@ -94,14 +94,21 @@ exports.index = function(req, res) {
     },
     // カンバン一覧のissueidからissue情報を撮る
     function (kanbans, callback) {
-      callback(null, kanbans,
-        v(kanbans).chain().map(function(kanban) {
-          console.log('issueid = ' + kanban.issueid);
-          Pbl.find({'username': orgname, 'reponame': reponame, 'issueId': {$in: kanban.issueid}}, function(err, pbls) {
-            return {'username': kanban.username, 'pbls': pbls};
-          });
-        }).flatten().value()
-      );
+      for (var i = 0; i < kanbans.length; i++) {
+        kanbans[i].issueid;
+      }
+
+      var pbls = v(kanbans).chain().map(function(kanban) {
+                  var condition = {'username': orgname, 'reponame': reponame, 'issueId': {$in: kanban.issueid}};
+                  Pbl.find(condition, function(err, pbls) {
+                    var result = {'username': kanban.username, 'pbls': pbls};
+                    console.log('result = ');
+                    console.log(result);
+                    return result;
+                  });
+                }).flatten().value();
+      console.log(pbls);
+      callback(null, kanbans, pbls);
     }
   ], function(err, kanbans, pbls) {
     if (err) console.log(err);
@@ -166,14 +173,21 @@ exports.create = function(req, res) {
       console.log('data = ');
       console.log(data);
       postGithubAPI(path, data, accessToken, callback);
+    },
+    function (res, callback) {
+      var condition = {'orgname': orgname, 'reponame': reponame, 'username': username};
+      var update = {$push: {issueid: issueid}};
+      var options = {};
+      Kanban.update(condition, update, options, function (err, result) {
+        if (err) callback(err);
+        callback(null, result);
+      });
     }
-  ], function (err, results) {
+  ], function (err, result) {
     if (err) console.log('err = ' + err);
-    console.log('results = ');
-    console.log(results);
+    console.log('result = ');
+    console.log(result);
+    res.render('kanban-created', {'orgname': orgname, 'reponame': reponame, 'username': username, 'branchname': branchname});
   });
-
-  // TODO! this is mock
-  res.render('kanban-created', {'orgname': orgname, 'reponame': reponame, 'username': username, 'branchname': branchname});
 };
 
