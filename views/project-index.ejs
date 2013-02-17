@@ -4,11 +4,20 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    <legend>プロジェクト一覧</legend>
     <ul>
       <% for(var i = 0; i < projects.length; i++) {%>
         <li><a href="/projects/<%= projects[i].reponame %>"><%= projects[i].reponame %></a></li>
       <% } %>
     </ul>
-    <a href="/projects/new">プロジェクトの新規作成</a>
+    <legend>プロジェクトの新規作成</legend>
+    <form method="post" action="/projects/new">
+      <select name="reponame">
+        <% for(var i = 0; i < repos.length; i++) {%>
+          <option value="<%= repos[i].owner.login %>/<%= repos[i].name %>"><%= repos[i].owner.login %>/<%= repos[i].name %></option>
+        <% } %>
+      </select>
+      <input type="submit" value="プロジェクトの作成">
+    </form>
   </body>
 </html>

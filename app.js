@@ -63,7 +63,7 @@ app.configure(function(){
       , store: new RedisStore({db: 1, prefix: 'session:'})
       }
   ));
-    
+
   app.use(passport.initialize());
   app.use(passport.session());
 
@@ -92,7 +92,6 @@ app.get('/pbl', auth.useAuth, pblList.list);
 // project
 app.get('/projects', auth.useAuth, project.index);
 // app.get('/projects/:name', project.loadProject, project.detail);
-app.get('/projects/new', auth.useAuth, project.new);
 app.post('/projects/new', auth.useAuth, project.create);
 
 app.get('/pblCreate/index/:project', auth.useAuth, pblCreate.index);
