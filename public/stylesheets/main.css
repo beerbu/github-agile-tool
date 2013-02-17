@@ -3,22 +3,24 @@
   line-height: 1; }
 
 /* newIssue ========== */
-#newIssue form {
-  margin-bottom: 0; }
-#newIssue .titleWr {
-  display: -webkit-box;
-  -webkit-box-orient: horizontal; }
-  #newIssue .titleWr input {
+#newIssue {
+  margin-top: 20px; }
+  #newIssue form {
+    margin-bottom: 0; }
+  #newIssue .titleWr {
     display: -webkit-box;
-    -webkit-box-flex: 1;
-    margin-right: 10px;
-    font-weight: bold; }
-#newIssue .btn {
-  margin-bottom: 10px; }
-#newIssue .dropdown-menu input {
-  display: none; }
-#newIssue .formSubmit {
-  text-align: right; }
+    -webkit-box-orient: horizontal; }
+    #newIssue .titleWr input {
+      display: -webkit-box;
+      -webkit-box-flex: 1;
+      margin-right: 10px;
+      font-weight: bold; }
+  #newIssue .btn {
+    margin-bottom: 10px; }
+  #newIssue .dropdown-menu input {
+    display: none; }
+  #newIssue .formSubmit {
+    text-align: right; }
 
 /* #issueList ========== */
 #issueList thead {
