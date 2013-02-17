@@ -3,6 +3,7 @@ exports.github = function(req, res){
 };
 
 exports.callback = function(req, res) {
+    req.session.accessToken = require('passport').session.accessToken;
     res.redirect('/');
 }
 
