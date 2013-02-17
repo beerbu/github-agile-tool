@@ -4,6 +4,7 @@
 var currentUser = '<%= user%>';
 var currentProject = '<%= project%>';
 </script>
+<% if (!locals.iterating) { %>
 <div id="sprintSetting" class="alert alert-info">
     <p><strong>イテレーションが開始されていません。</strong></p>
     <p>1イテレーションの長さを選択して、イテレーションを開始して下さい。</p>
@@ -34,6 +35,7 @@ var currentProject = '<%= project%>';
         </fieldset>
     </form>
 </div>
+<% } %>
 <div id="newIssue" class="well well-small">
   <h3 class="heading">新規PBL作成</h3>
   <form action="/pblCreate/save" method="post">
