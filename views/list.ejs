@@ -56,9 +56,9 @@ var currentProject = '<%= project%>';
     <thead>
       <tr>
 	<th class="span1 priority active">Priority</th>
-	<th class="span7">Title</th>
+	<th class="span8">Title</th>
 	<th class="span1">Point</th>
-	<th class="span3">Assign</th>
+	<th class="span2">Assign</th>
       </tr>
     </thead>
     <tbody id="sortable" class="pblClass">
@@ -86,6 +86,7 @@ var currentProject = '<%= project%>';
 	  <img src="/img/notassigned.png">
 	  <span>not assigned</span>
 	  <% } %>
+      <div class="getTask btn btn-primary">対応</div>
 	</td>
       </tr>
       <% }); %>
