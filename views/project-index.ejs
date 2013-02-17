@@ -15,9 +15,15 @@
   <div class="container">
     <header class="navbar navbar-fixed-top">
       <div class="navbar-inner">
-      <p class="brand">Ajilehub</p>
+      <p class="brand">Agilehub</p>
       <ul class="nav">
-        <li><a href="#"><img src="https://secure.gravatar.com/avatar/345c13e732b218fc5496d8b50ebeaa9b?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" alt="hiraya">hiraya</a></li>
+        <li>
+        <% if(locals.login) { %>
+          <a href="#"><img src="<%=login.user._json.avatar_url%>" alt="avater"><%= login.user.username %></a>
+        <% } else { %>
+          <a href="/auth/github">login</a>
+        <% } %>
+        </li>
       </ul>
     </div>
     </header>
@@ -27,7 +33,7 @@
 
       <div id="newProject" class="well well-small">
         <h2 class="heading">プロジェクト新規作成</h2>
-        <p class="message">プルダウンメニューからリポジトリを選択してプロジェクトを作成して下さい。</p>  
+        <p class="message">プルダウンメニューからGithubリポジトリを選択してプロジェクトを作成して下さい。</p>  
         <form method="post" action="/projects/new">
           <select name="reponame">
             <% for(var i = 0; i < repos.length; i++) {%>
