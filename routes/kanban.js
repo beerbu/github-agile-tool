@@ -125,7 +125,9 @@ exports.index = function(req, res) {
       }
       kanbans[i].issues = issues;
     }
-    res.render('kanban-index', { 'kanbans': kanbans, 'login': req.session.passport, 'title': 'カンバン一覧'});
+	var user = req.params.orgname;
+    var project = req.params.reponame;
+    res.render('kanban-index', { 'kanbans': kanbans, 'login': req.session.passport, 'title': 'カンバン一覧', user:user, project:project});
   });
 };
 
