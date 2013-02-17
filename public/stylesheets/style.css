@@ -1,8 +1,69 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+  padding-top: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 a {
-  color: #00B7FF;
-}
+  color: #00B7FF; }
+
+/* header ========== */
+header.navbar .navbar-inner {
+  display: -webkit-box;
+  width: 940px;
+  margin: auto;
+  box-shadow: none; }
+header.navbar .brand {
+  float: none;
+  margin-left: 0;
+  display: -webkit-box;
+  -webkit-box-flex: 1; }
+header.navbar p {
+  margin: 0; }
+header.navbar img {
+  height: 22px;
+  width: 22px;
+  border-radius: 11px;
+  margin-right: 3px; }
+header.navbar .nav {
+  border-left: 1px solid #eaeaea; }
+
+/* projectTitle ========== */
+#projectTitle {
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  height: 80px;
+  background: #fb3166;
+  color: #fff;
+  -webkit-box-align: end;
+  margin-top: -16px;
+  padding: 0 20px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3) inset; }
+  #projectTitle h1 {
+    display: -webkit-box;
+    -webkit-box-flex: 1;
+    font-size: 30px;
+    margin-bottom: 5px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2); }
+  #projectTitle .navTab {
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+    list-style-type: none; }
+    #projectTitle .navTab li a {
+      display: block;
+      line-height: 35px;
+      width: 200px;
+      text-align: center;
+      vertical-align: middle;
+      margin-right: 10px;
+      background: #ffa1b9;
+      color: #555;
+      border-radius: 3px 3px 0 0; }
+    #projectTitle .navTab .crr a {
+      background: #fff; }
+
+/* footer ========= */
+.credit {
+  background: #e0e0e0;
+  color: #555;
+  padding: 10px 0;
+  border-top: 2px solid #ccc;
+  text-align: center; }

@@ -1,16 +1,52 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+    <title>{{title}}</title>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.css' type='text/css'>
+    <link rel='stylesheet' href='/stylesheets/style.css' type='text/css'>
+    <link rel='stylesheet' href='/stylesheets/main.css' type='text/css'>
+    <script type="text/javascript" src='/js/jquery-1.9.1.min.js'></script>
+    <script type="text/javascript" src='/js/jquery-ui-1.10.1.custom.min.js'></script>
+    <script type="text/javascript" src="./js/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src='/js/bootstrap.js'></script>
   </head>
   <body>
-    <form method="post" action="/projects/new">
-      <select name="reponame">
-        <% for(var i = 0; i < repos.length; i++) {%>
-          <option value="<%= repos[i].name %>"><%= repos[i].name %></option>
-        <% } %>
-      </select>
-      <input type="submit" value="プロジェクトの作成">
-    </form>
-  </body>
-</html>
+  <div class="container">
+    <header class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+      <p class="brand">Ajilehub</p>
+      <ul class="nav">
+        <li><a href="#"><img src="https://secure.gravatar.com/avatar/345c13e732b218fc5496d8b50ebeaa9b?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" alt="hiraya">hiraya</a></li>
+      </ul>
+    </div>
+    </header>
+
+    <div id="projects">
+      <h1>プロジェクト管理</h1>
+
+      <div id="newProject" class="well well-small">
+        <h2 class="heading">プロジェクト新規作成</h2>
+        <form method="post" action="/projects/new">
+          <select name="reponame">
+            <% for(var i = 0; i < repos.length; i++) {%>
+              <option value="<%= repos[i].name %>"><%= repos[i].name %></option>
+            <% } %>
+          </select>
+          <button type="submit" class="btn btn-primary">プロジェクトの作成</button>
+        </form>
+      </div>
+    </div>
+
+    <% if (projects.length) { %>
+    <div id="projectList">
+      <h2 class="heading">プロジェクト一覧</h2>
+       <ul>
+      <% for(var i = 0; i < projects.length; i++) {%>
+        <li><a href="/projects/<%= projects[i].reponame %>"><%= projects[i].reponame %></a></li>
+      <% } %>
+    </ul>
+    </div>
+    <% } %>
+
+<% include footer %>
