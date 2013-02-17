@@ -8,7 +8,7 @@ exports.index = function(req, res) {
 exports.save = function(req, res) {
     console.log(req.body);
 	var token= req.session.accessToken;
-	var post_data = {"title":req.body.title, "labels":["PBL"], "body":req.body.comment};
+    var post_data = {"title":req.body.title, "labels":["PBL"], "body":req.body.comment};
     var postStr = JSON.stringify(post_data);
     console.log(postStr);
     var headers = {'Content-Type': 'application/json', 'Content-Length': postStr.length, 'Authorization': 'token ' + token};
