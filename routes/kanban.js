@@ -94,21 +94,29 @@ exports.index = function(req, res) {
     },
     // カンバン一覧のissueidからissue情報を撮る
     function (kanbans, callback) {
-      for (var i = 0; i < kanbans.length; i++) {
-        kanbans[i].issueid;
+      var list = new Array();
+      var count = 0;
+      function reduce(result) {
+        count++;
+        if (result.pbls.length) {
+          list.push(result);
+        }
+
+        if (count === kanbans.length) {
+          callback(null, kanbans, list);
+        }
       }
 
-      var pbls = v(kanbans).chain().map(function(kanban) {
-                  var condition = {'username': orgname, 'reponame': reponame, 'issueId': {$in: kanban.issueid}};
-                  Pbl.find(condition, function(err, pbls) {
-                    var result = {'username': kanban.username, 'pbls': pbls};
-                    console.log('result = ');
-                    console.log(result);
-                    return result;
-                  });
-                }).flatten().value();
-      console.log(pbls);
-      callback(null, kanbans, pbls);
+      for (var i = 0; i < kanbans.length; i++) {
+        var kanban = kanbans[i];
+        var condition = {'username': orgname, 'reponame': reponame, 'issueId': {$in: kanban.issueid}};
+        Pbl.find(condition, function(err, pbls) {
+          if (err) console.log(err);
+
+          var result = {'username': kanban.username, 'pbls': pbls};
+          reduce(result);
+        });
+      }
     }
   ], function(err, kanbans, pbls) {
     if (err) console.log(err);
