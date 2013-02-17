@@ -6,6 +6,10 @@ exports.graph = function(req, res) {
     var burndown = [];
     var dummy2 = "[[1, 0], [2, 30], [3, 30], [4, 200]]";
     var project = 'github-agile-tool';
+
+    var user = req.params.user;
+    var project = req.params.project;
+
     Burndown.find({'project':project, 'type':'burndown'}).sort('iteration').exec(function(err, burn) {
         if(err) throw err;
         for(var i in burn) {
@@ -13,7 +17,8 @@ exports.graph = function(req, res) {
             console.log(data);
             burndown.push(data);
         }
-        res.render('graph', {burndown:burndown, velocity:dummy2, login:req.session.passport});
+        res.render('graph', {burndown:burndown, velocity:dummy2, login:req.session.passport,
+                             user:user,project:project});
     });
 };
 
