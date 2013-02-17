@@ -3,6 +3,13 @@ $(function () {
         var url = '/' + currentUser+ '/' + currentProject + '/pbl/' + $(this).data('pbl');
         $.post(url,{point:$(this).val()});
     });    
+    function savePriority() {
+        var i=0;
+        $('.pblClass').find('tr').each(function() {
+            var url = '/' + currentUser+ '/' + currentProject + '/pbl/' + $(this).data('pbl');
+            $.post(url,{priority:i++});
+        });
+    }
     
     function assign() {
 	$('.cancel').click(function (){
@@ -26,6 +33,7 @@ $(function () {
 		$($(rows)[i]).text(i + 1);
 	    }
 	    console.log('ソート完了');
+            savePriority();
 	});
     };
 

@@ -45,9 +45,15 @@ console.log('point'+point);
             issue.username = user;
             issue.reponame = project;
             issue.issueId = id;
+            issues.point = '?';
+            issue.priority = 9999;
         }
-        issue.point = point? point: "?";
-        issue.priority = priority? priority: 100;
+        if (point) {
+            issue.point = point;
+        }
+        if(priority) {
+            issue.priority = priority;
+        }
         issue.save(function(err) {
             if (err) console.log(err);
             res.end("done");
