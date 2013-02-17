@@ -116,7 +116,7 @@ var currentProject = '<%= project%>';
 	  <span>not assigned</span>
 	  <% } %>
       <% if(issue.assignee && issue.assignee.login == user) { %>
-      <form action="/<%= user %>/<%= project %>/kanban/new" method="post" style="display:inline">
+      <form action="/<%= loginuser %>/<%= project %>/kanban/new" method="post" style="display:inline">
           <input type="hidden" value="<%= issue.number %>" name="issueid">
           <input type="hidden" value="develop" name="branchname">
 		  <button type="submit" class="getTask btn btn-primary">対応</button>
