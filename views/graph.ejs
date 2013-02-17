@@ -5,7 +5,7 @@
 </div>
 
 <script type="text/javascript">
-var burndown = <%= burndown %>,
+var burndown = <%= JSON.stringify(burndown) %>,
     velocity = <%= velocity %>;
 </script>
 <script type="text/javascript" src='/js/graph.js'></script>
