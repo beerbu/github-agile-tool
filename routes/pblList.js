@@ -28,8 +28,9 @@ exports.list = function(req, res){
                     issues.sort(function(a,b) {
                         return a.priority > b.priority ? 1: -1;
                     });
+
                     res.render('list', {title:"List", 'login': req.session.passport, issues:issues,
-                                       user:user,project:project});
+                                       user:user,project:project, loginuser:req.session.passport.user.username});
                 });
             });
 };
