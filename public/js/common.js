@@ -56,6 +56,8 @@ $(function () {
             $("#pbl").addClass("crr");
         } else if(url.match(/burndown$/)) {
             $("#burndown").addClass("crr");
+        } else if(url.match(/kanban$/)) {
+		    $("#kanban").addClass("crr");
         }
     }
 
