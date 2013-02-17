@@ -51,7 +51,7 @@ header.navbar .nav {
   #projectTitle h1 {
     display: -webkit-box;
     -webkit-box-flex: 1;
-    font-size: 30px;
+    font-size: 26px;
     margin-bottom: 5px;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2); }
   #projectTitle .navTab {
