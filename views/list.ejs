@@ -59,7 +59,7 @@
 		<tbody id="sortable">
 			<% issues.forEach(function(issue) { %>
 			<tr>
-				<td class="priority">1</td>
+				<td class="priority">1:<%= issue.priority  %></td>
 				<td class="issueTitle"><%= issue.title %></td>
 				<td class="point">
 					<select name="point" id="issuePoint">

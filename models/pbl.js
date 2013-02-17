@@ -1,4 +1,3 @@
-
 /*
  * project model
  */
@@ -12,5 +11,5 @@ var Project = new Schema({
     reponame  : String
 });
 
-mongoose.model('Project', Project);
-module.exports = db.model('Project');
+mongoose.model('Pbl', Project);
+module.exports = db.model('Pbl');
