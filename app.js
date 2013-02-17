@@ -101,8 +101,13 @@ app.get('/pblCreate/index/:project', auth.useAuth, pblCreate.index);
 app.post('/pblCreate/save', auth.useAuth, pblCreate.save);
 
 app.get('/:user/:project/burndown', auth.useAuth, burndown.graph);
-app.get('/burndownCreate', auth.useAuth, burndown.createBurndownMock);
-app.get('/burndownRemove', auth.useAuth, burndown.removeAll);
+
+//batch
+app.get('/:user/:project/batch/exec', auth.useAuth, burndown.batch);
+
+//for demo
+app.get('/demo/graph', auth.useAuth, burndown.createMock);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
