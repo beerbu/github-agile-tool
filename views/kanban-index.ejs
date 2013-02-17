@@ -7,9 +7,8 @@
       <h3><%= kanbans[i].username %></h3>
       <ul>
       <% if (kanbans[i].issues.length) {%>
-          <% for (var j = 0; j < kanbans[i].issues.length; j++) {%>
-            <li><a href="http://github.com/<%= kanbans[i].orgname %>/<%= kanbans[i].reponame %>/issues/<%= kanbans[i].issues[j].issueId %>">着手中PBL: <%= kanbans[i].issues[j].issueId %></a></li>
-            <li><a href="#">Task Title</a></li>
+          <% for (var j = 0; j < kanbans[i].issueid.length; j++) {%>
+            <li><a href="http://github.com/<%= kanbans[i].orgname %>/<%= kanbans[i].reponame %>/issues/<%= kanbans[i].issueid[j] %>">着手中PBL: <%= kanbans[i].issueid[j] %></a></li>
           <% } %>
       </ul>
       <% } else {%>

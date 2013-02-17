@@ -145,6 +145,9 @@
 		border-bottom: 1px solid #e3e3e3;
 		list-style-type: none;
 	}
+	li:last-child {
+		border-bottom: none;
+	}
 	.noTask {
 		color: #555;
 		margin: 10px 20px;

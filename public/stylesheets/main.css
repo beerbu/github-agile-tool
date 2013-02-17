@@ -97,6 +97,8 @@
     padding: 5px 20px;
     border-bottom: 1px solid #e3e3e3;
     list-style-type: none; }
+  .kanbanUser li:last-child {
+    border-bottom: none; }
   .kanbanUser .noTask {
     color: #555;
     margin: 10px 20px; }
