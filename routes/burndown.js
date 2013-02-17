@@ -4,7 +4,7 @@ exports.graph = function(req, res) {
     //mongoからデータ取得
     var dummy = "[[1, 100], [2, 70], [3, 40], [4, 300]]";
 	var dummy2 = "[[1, 0], [2, 30], [3, 30], [4, 200]]";
-    res.render('graph', {burndown:dummy, velocity:dummy2});
+    res.render('graph', {burndown:dummy, velocity:dummy2, login:req.session.passport});
 };
 
 exports.createBurndownMock = function(req, res) {
