@@ -6,8 +6,11 @@
 
 <script type="text/javascript">
 var burndown = <%= JSON.stringify(burndown) %>,
-    velocity = <%= velocity %>;
+    velocity = <%= JSON.stringify(velocity) %>;
 </script>
 <script type="text/javascript" src='/js/graph.js'></script>
 
+<div>
+<input type="button" value="exec Batch" onClick="window.open('/<%=user %>/<%=project %>/batch/exec')">
+</div>
 <% include footer %>

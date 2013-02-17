@@ -115,7 +115,13 @@ var currentProject = '<%= project%>';
 	  <img src="/img/notassigned.png">
 	  <span>not assigned</span>
 	  <% } %>
-      <button type="submit" value="#" class="getTask btn btn-primary">対応</button>
+      <% if(issue.assignee && issue.assignee.login == user) { %>
+      <form action="/<%= user %>/<%= project %>/kanban/new" method="post" style="display:inline">
+          <input type="hidden" value="<%= issue.number %>" name="issueid">
+          <input type="hidden" value="develop" name="branchname">
+		  <button type="submit" class="getTask btn btn-primary">対応</button>
+      </form>
+      <% } %>
 	</td>
       </tr>
       <% }); %>
