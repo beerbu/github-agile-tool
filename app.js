@@ -14,6 +14,8 @@ var express = require('express')
   , http = require('http')
   , path = require('path');
 
+var RedisStore = require('connect-redis')(express);
+
 var passport = require('passport')
   , util = require('util')
   , GitHubStrategy = require('passport-github').Strategy;
@@ -52,11 +54,17 @@ app.configure(function(){
   app.set('view engine', 'ejs');
   app.use(express.favicon());
   app.use(express.logger('dev'));
-  app.use(express.cookieParser());
+  app.use(express.cookieParser('secret','heyheyhey'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(express.session({ secret: 'heyhey' }));
-
+  app.use(express.session(
+      {
+        key: 'sess_id'
+      , cookie: {maxAge: 1000 * 60 * 60 * 24 * 7}
+      , store: new RedisStore({db: 1, prefix: 'session:'})
+      }
+  ));
+    
   app.use(passport.initialize());
   app.use(passport.session());
 
