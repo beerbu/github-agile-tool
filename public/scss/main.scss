@@ -6,13 +6,13 @@
   -o-#{$name}: $argument;
 }
 
+.heading {
+	font-size: 20px;
+	line-height: 1;
+
+}
 /* newIssue ========== */
 #newIssue {
-	.heading {
-		font-size: 20px;
-		line-height: 1;
-
-	}
 	form {
 		margin-bottom: 0;
 	}
@@ -70,5 +70,13 @@ background-image: linear-gradient(to bottom, #F2F2F2, white);
 			background: #fff;
 			border-radius: 0;
 		}
+	}
+}
+
+
+/* #newProject */
+#newProject {
+	select {
+		margin-bottom: 0;
 	}
 }
