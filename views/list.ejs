@@ -63,14 +63,14 @@
 				<td class="issueTitle"><%= issue.title %></td>
 				<td class="point">
 					<select name="point" id="issuePoint">
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="5">5</option>
-						<option value="8">8</option>
-						<option value="13">13</option>
-						<option value="20">20</option>
-						<option value="?">?</option>
+<% 
+  var points = ['1','2','3','5','8','13','20','?'];
+  points.forEach(function (p) {
+%>
+  <option value="<%=p%>" <%= p==issue.point? 'selected':''%>><%=p%></option>
+<%
+  });
+%>
 					</select>
 				</td>
 				<td class="assignee">

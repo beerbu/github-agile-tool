@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
-    <title><%= title %></title>
+    <title>{{title}}</title>
     <link rel='stylesheet' href='/stylesheets/bootstrap.css' type='text/css'>
     <link rel='stylesheet' href='/stylesheets/style.css' type='text/css'>
     <link rel='stylesheet' href='/stylesheets/main.css' type='text/css'>
@@ -30,12 +30,11 @@
         <form method="post" action="/projects/new">
           <select name="reponame">
             <% for(var i = 0; i < repos.length; i++) {%>
-              <option value="<%= repos[i].owner.login %>/<%= repos[i].name %>"><%= repos[i].owner.login %>/<%= repos[i].name %></option>
+              <option value="<%= repos[i].name %>"><%= repos[i].name %></option>
             <% } %>
           </select>
           <button type="submit" class="btn btn-primary">プロジェクトの作成</button>
         </form>
-        <p id="message"></p>
       </div>
     </div>
 
@@ -44,7 +43,7 @@
       <h2 class="heading">プロジェクト一覧</h2>
        <ul>
       <% for(var i = 0; i < projects.length; i++) {%>
-        <li><a href="/<%= projects[i].orgname %>/<%= projects[i].reponame %>/pbl"><%= projects[i].orgname %>/<%= projects[i].reponame %></a></li>
+        <li><a href="/projects/<%= projects[i].reponame %>"><%= projects[i].reponame %></a></li>
       <% } %>
     </ul>
     </div>

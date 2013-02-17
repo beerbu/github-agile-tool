@@ -10,6 +10,7 @@ var express = require('express')
   , pblList = require('./routes/pblList')
   , project = require('./routes/project')
   , pblCreate = require('./routes/pblCreate')
+  , burndown = require('./routes/burndown')
   , http = require('http')
   , path = require('path');
 
@@ -87,7 +88,9 @@ app.get('/auth/github/callback',
 app.get('/auth/account', auth.useAuth, auth.account);
 
 //pbl一覧
-app.get('/pbl', auth.useAuth, pblList.list);
+app.get('/:user/:project/pbl', auth.useAuth, pblList.list);
+//pbl更新
+app.post('/:user/:project/pbl/:id', auth.useAuth, pblList.setIssue);
 
 // project
 app.get('/projects', auth.useAuth, project.index);
@@ -96,6 +99,9 @@ app.post('/projects/new', auth.useAuth, project.create);
 
 app.get('/pblCreate/index/:project', auth.useAuth, pblCreate.index);
 app.post('/pblCreate/save', auth.useAuth, pblCreate.save);
+
+app.get('/burndown', auth.useAuth, burndown.graph);
+app.get('/burndownCreate', auth.useAuth, burndown.createBurndownMock);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

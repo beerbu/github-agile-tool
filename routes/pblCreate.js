@@ -7,7 +7,7 @@ exports.index = function(req, res) {
 
 exports.save = function(req, res) {
     console.log(req.body);
-	var token= require('passport').session.accessToken;
+	var token= req.session.accessToken;
 	var post_data = {"title":req.body.title, "body":req.body.body, "labels":["PBL"]};
     var postStr = JSON.stringify(post_data);
     var headers = {'Content-Type': 'application/json', 'Content-Length': postStr.length, 'Authorization': 'token ' + token};

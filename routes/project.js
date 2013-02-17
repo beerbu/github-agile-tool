@@ -92,7 +92,7 @@ exports.index = function(req, res) {
       }
     ], function (err, results) {
         if (err) console.log(err);
-        res.render('project-index', { 'projects' : results[1], 'repos': results[0]});
+        res.render('project-index', { 'title': 'プロジェクト管理', 'projects' : results[1], 'repos': results[0]});
       }
     );
 };
