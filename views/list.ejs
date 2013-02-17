@@ -4,7 +4,36 @@
 var currentUser = '<%= user%>';
 var currentProject = '<%= project%>';
 </script>
-
+<div id="sprintSetting" class="alert alert-info">
+    <p><strong>イテレーションが開始されていません。</strong></p>
+    <p>1イテレーションの長さを選択して、イテレーションを開始して下さい。</p>
+    <form action="">
+        <fieldset>
+            <div id="sprintTerm" class="btn-group">
+                <button class="btn dropdown-toggle btn-primary btn-large" data-toggle="dropdown"><span class="btnText">イテレーション</span> <span class="caret"></span></button>
+                <button class="btn btn-primary btn-large">開始</button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="#"><label>
+                      <input type="radio" name="term" value="1">1 week</label></a>
+                    </li>
+                    <li>
+                      <a href="#"><label>
+                      <input type="radio" name="term" value="2">2 week</label></a>
+                    </li>
+                    <li>
+                      <a href="#"><label>
+                      <input type="radio" name="term" value="3">3 week</label></a>
+                    </li>
+                    <li>
+                      <a href="#"><label>
+                      <input type="radio" name="term" value="4">4 week</label></a>
+                    </li>
+                  </ul>
+                </div>
+        </fieldset>
+    </form>
+</div>
 <div id="newIssue" class="well well-small">
   <h3 class="heading">新規PBL作成</h3>
   <form action="/pblCreate/save" method="post">

@@ -11,6 +11,25 @@
 	line-height: 1;
 
 }
+/* sprintSetting ========== */
+#sprintSetting {
+	margin-top: 20px;
+
+	#sprintTerm {
+		.btn {
+			border-radius: 0 4px 4px 0;
+		}
+		.dropdown-toggle {
+			width: 180px;
+			border-radius: 4px 0 0 4px;
+		}
+		.dropdown-menu {
+			input {
+				display: none;
+			}
+		}
+	}
+}
 /* newIssue ========== */
 #newIssue {
 	margin-top: 20px;

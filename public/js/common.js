@@ -11,16 +11,21 @@ $(function () {
         });
     }
     
-    function assign() {
+    $('#sprintTerm input[type=radio]').bind('click', function (){
+        var term = $(this).val(),
+        btnText = $('#sprintTerm .btnText').text(term);
+        console.log(term);
+        $(btnText).text(term + ' week');
+    });
+
 	$('.cancel').click(function (){
 	    $('#assign .name').text('Assign').parent().removeClass('btn-info')
-	})
+	});
 	$('#assign input[type="radio"]').bind('click', function (){
 	    var selectedName = $(this).val(),
 	    btnText = $('#assign .name').text(selectedName);
 	    $(btnText).text(selectedName).parent().addClass('btn-info');
-	})
-    };
+	});
 
     function sortable() {
 	$('#sortable').sortable().disableSelection();
@@ -32,10 +37,9 @@ $(function () {
 	    console.log('ソート完了');
             savePriority();
 	});
-    };
+    }
 
     sortable();
-    assign();
 
     // 1行目のクリックされたセルをアクティブ表示にする
     //$('#issueTable th').click(function (){
