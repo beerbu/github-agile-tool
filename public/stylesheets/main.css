@@ -2,23 +2,36 @@
   font-size: 20px;
   line-height: 1; }
 
+/* sprintSetting ========== */
+#sprintSetting {
+  margin-top: 20px; }
+  #sprintSetting #sprintTerm .btn {
+    border-radius: 0 4px 4px 0; }
+  #sprintSetting #sprintTerm .dropdown-toggle {
+    width: 180px;
+    border-radius: 4px 0 0 4px; }
+  #sprintSetting #sprintTerm .dropdown-menu input {
+    display: none; }
+
 /* newIssue ========== */
-#newIssue form {
-  margin-bottom: 0; }
-#newIssue .titleWr {
-  display: -webkit-box;
-  -webkit-box-orient: horizontal; }
-  #newIssue .titleWr input {
+#newIssue {
+  margin-top: 20px; }
+  #newIssue form {
+    margin-bottom: 0; }
+  #newIssue .titleWr {
     display: -webkit-box;
-    -webkit-box-flex: 1;
-    margin-right: 10px;
-    font-weight: bold; }
-#newIssue .btn {
-  margin-bottom: 10px; }
-#newIssue .dropdown-menu input {
-  display: none; }
-#newIssue .formSubmit {
-  text-align: right; }
+    -webkit-box-orient: horizontal; }
+    #newIssue .titleWr input {
+      display: -webkit-box;
+      -webkit-box-flex: 1;
+      margin-right: 10px;
+      font-weight: bold; }
+  #newIssue .btn {
+    margin-bottom: 10px; }
+  #newIssue .dropdown-menu input {
+    display: none; }
+  #newIssue .formSubmit {
+    text-align: right; }
 
 /* #issueList ========== */
 #issueList thead {
@@ -30,9 +43,11 @@
   background-image: -webkit-linear-gradient(top, #f2f2f2, white);
   background-image: -o-linear-gradient(top, #f2f2f2, white);
   background-image: linear-gradient(to bottom, #f2f2f2, white); }
-#issueList .assignee img {
-  width: 20px;
-  height: 20px; }
+#issueList .assignee {
+  position: relative; }
+  #issueList .assignee img {
+    width: 20px;
+    height: 20px; }
 #issueList .point {
   padding: 0; }
   #issueList .point select {
@@ -42,6 +57,16 @@
     border: none;
     background: #fff;
     border-radius: 0; }
+#issueList .getTask {
+  display: block;
+  padding: 3px 5px;
+  width: 40px;
+  position: absolute;
+  right: -41px;
+  top: 3px;
+  border-radius: 0 3px 3px 0;
+  border-left: none;
+  overflow: hidden; }
 
 /* #newProject ========== */
 #newProject select {
@@ -49,7 +74,7 @@
 
 /* #graph ========= */
 #graph {
-  width: 700px;
-  height: 700px;
-  margin: auto;
-  border: 1px solid #ccc; }
+  width: 900px;
+  height: 500px;
+  margin: 10px auto;
+  padding-top: 10px; }

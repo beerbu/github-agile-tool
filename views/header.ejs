@@ -9,6 +9,7 @@
     <script type="text/javascript" src='/js/jquery-1.9.1.min.js'></script>
     <script type="text/javascript" src='/js/jquery-ui-1.10.1.custom.min.js'></script>
     <script type="text/javascript" src="/js/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src='/js/flotr2.min.js'></script>
     <script type="text/javascript" src='/js/bootstrap.js'></script>
     <script type="text/javascript" src='/js/common.js'></script>
   </head>
@@ -19,22 +20,25 @@
       <p class="brand">Agilehub</p>
       <ul class="nav">
         <li>
-<% if(locals.login) { %>
-  <a href="#"><img src="<%=login.user._json.avatar_url%>" alt="avater"><%= login.user.username %></a></li>
-<% } else { %>
-  <a href="/auth/github">login</a></ul>
-<% } %>
+        <% if(locals.login) { %>
+          <a href="#"><img src="<%=login.user._json.avatar_url%>" alt="avater"><%= login.user.username %></a>
+        <% } else { %>
+          <a href="/auth/github">login</a>
+        <% } %>
+        </li>
       </ul>
     </div>
     </header>
 
+      <% if(typeof user != "undefined" && typeof project != "undefined") { %>
       <div id="projectTitle">
-        <h1>Github-agile-tool</h1>
+        <h1><%= project %> Github-agile-tool</h1>
           <nav>
-            <ul class="navTab">
-              <li class="crr"><a href="#">PBL</a></li>
-              <li><a href="#">BurnDown</a></li>
+            <ul class="navTab" id="navTab">
+              <li id="pbl"><a href="/<%= user%>/<%= project%>/pbl">PBL</a></li>
+              <li id="burndown"><a href="/<%= user%>/<%= project%>/burndown">BurnDown</a></li>
             </ul>
           </nav>
       </div>
+      <% } %>
 

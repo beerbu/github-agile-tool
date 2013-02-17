@@ -15,7 +15,18 @@ header.navbar .brand {
   float: none;
   margin-left: 0;
   display: -webkit-box;
-  -webkit-box-flex: 1; }
+  -webkit-box-flex: 1;
+  -webkit-box-align: center;
+  -webkit-box-orient: horizontal; }
+header.navbar .brand::before {
+  content: '';
+  display: -webkit-box;
+  height: 24px;
+  width: 24px;
+  background: url("../img/icon.png") 0 0 no-repeat;
+  -webkit-background-size: 24px 24px;
+  background-size: 24px 24px;
+  margin-right: 3px; }
 header.navbar p {
   margin: 0; }
 header.navbar img {

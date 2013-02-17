@@ -1,93 +1,126 @@
 <% include header %>
 
-<h2><%= title %></h2>
-
+<script>
+var currentUser = '<%= user%>';
+var currentProject = '<%= project%>';
+</script>
+<div id="sprintSetting" class="alert alert-info">
+    <p><strong>イテレーションが開始されていません。</strong></p>
+    <p>1イテレーションの長さを選択して、イテレーションを開始して下さい。</p>
+    <form action="">
+        <fieldset>
+            <div id="sprintTerm" class="btn-group">
+                <button class="btn dropdown-toggle btn-primary btn-large" data-toggle="dropdown"><span class="btnText">イテレーション</span> <span class="caret"></span></button>
+                <button class="btn btn-primary btn-large">開始</button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="#"><label>
+                      <input type="radio" name="term" value="1">1 week</label></a>
+                    </li>
+                    <li>
+                      <a href="#"><label>
+                      <input type="radio" name="term" value="2">2 week</label></a>
+                    </li>
+                    <li>
+                      <a href="#"><label>
+                      <input type="radio" name="term" value="3">3 week</label></a>
+                    </li>
+                    <li>
+                      <a href="#"><label>
+                      <input type="radio" name="term" value="4">4 week</label></a>
+                    </li>
+                  </ul>
+                </div>
+        </fieldset>
+    </form>
+</div>
 <div id="newIssue" class="well well-small">
-	<h3 class="heading">新規PBL作成</h3>
-	<form action="" method="post">
-		<fieldset>
-			<div class="titleWr">
-				<input type="text" class="title" placeholder="Title">
-				<div id="assign" class="btn-group">
-	       			 <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="name">Assign</span> <span class="caret"></span></button>
-			        <ul class="dropdown-menu">
-			            <li>
-			            	<a href="#"><label>
-			            		<input type="radio" name="asignee" value="akiomik">akiomik
-			            	</label></a>
-			        	</li>
-			            <li>
-			            	<a href="#"><label>
-			            		<input type="radio" name="asignee" value="hiraya">hiraya
-			            	</label></a>
-			        	</li>
-			            <li>
-			            	<a href="#"><label>
-			            		<input type="radio" name="asignee" value="john-smith">john-smith
-			            	</label></a>
-			        	</li>
-			            <li>
-			            	<a href="#"><label>
-			            		<input type="radio" name="asignee" value="nakaji-dayo">nakaji-dayo
-			            	</label></a>
-			        	</li>
-			        	<li class="divider"></li>
-			            <li class="cancel">
-			            	<a href="#">cancel</a>
-			        	</li>
-			        </ul>
-	    		</div>
-    		</div>
-    		<textarea name="comment" id="issueComment" rows="3" placeholder="Comment here" class="input-block-level"></textarea>
-    		<div class="formSubmit">
-	    		<button type="submit" class="btn btn-primary">Create New PBL</button>
-	    	</div>
-		</fieldset>
-	</form>
+  <h3 class="heading">新規PBL作成</h3>
+  <form action="/pblCreate/save" method="post">
+    <fieldset>
+      <div class="titleWr">
+	<input type="text" class="title" placeholder="Title" name="title">
+	<div id="assign" class="btn-group">
+	  <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="name">Assign</span> <span class="caret"></span></button>
+	  <ul class="dropdown-menu">
+	    <li>
+	      <a href="#"><label>
+		  <input type="radio" name="asignee" value="akiomik">akiomik
+	      </label></a>
+	    </li>
+	    <li>
+	      <a href="#"><label>
+		  <input type="radio" name="asignee" value="hiraya">hiraya
+	      </label></a>
+	    </li>
+	    <li>
+	      <a href="#"><label>
+		  <input type="radio" name="asignee" value="john-smith">john-smith
+	      </label></a>
+	    </li>
+	    <li>
+	      <a href="#"><label>
+		  <input type="radio" name="asignee" value="nakaji-dayo">nakaji-dayo
+	      </label></a>
+	    </li>
+	    <li class="divider"></li>
+	    <li class="cancel">
+	      <a href="#">cancel</a>
+	    </li>
+	  </ul>
+	</div>
+      </div>
+      <textarea name="comment" id="issueComment" rows="3" placeholder="Comment here" class="input-block-level"></textarea>
+      <div class="formSubmit">
+      <input type="hidden" name="user" value="<%= user %>">
+      <input type="hidden" name="project" value="<%= project %>">
+	<button type="submit" class="btn btn-primary">Create New PBL</button>
+      </div>
+    </fieldset>
+  </form>
 </div>
 
 <div id="issueList">
-	<table id="issueTable" class="table table-bordered table-hover">
-		<thead>
-			<tr>
-				<th class="span1 priority active">Priority</th>
-				<th>id</th>
-				<th class="span7">Title</th>
-				<th class="span1">Point</th>
-				<th class="span3">Assign</th>
-			</tr>
-		</thead>
-		<tbody id="sortable">
-			<% issues.forEach(function(issue) { %>
-			<tr>
-				<td class="priority">1:<%= issue.priority  %></td>
-				<td><%= issue.number %></td>
-				<td class="issueTitle"><%= issue.title %></td>
-				<td class="point">
-					<select name="point" id="issuePoint">
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="5">5</option>
-						<option value="8">8</option>
-						<option value="13">13</option>
-						<option value="20">20</option>
-						<option value="?">?</option>
-					</select>
-				</td>
-				<td class="assignee">
-					<% if (issue.assignee) { %>
-						<img src="<%= issue.assignee.avatar_url %>">
-						<span><%= issue.assignee.login %></span>
-					<% } else { %>
-						<img src="dummy.png">
-						<span>not assigned</span>
-					<% } %>
-				</td>
-			</tr>
-			<% }); %>
-		</tbody>
-	</table>
+  <table id="issueTable" class="table table-bordered table-hover">
+    <thead>
+      <tr>
+	<th class="span1 priority active">Priority</th>
+	<th class="span8">Title</th>
+	<th class="span1">Point</th>
+	<th class="span2">Assign</th>
+      </tr>
+    </thead>
+    <tbody id="sortable" class="pblClass">
+      <% issues.forEach(function(issue) { %>
+      <tr data-pbl="<%=issue.number %>">
+	<td class="priority"><%= issue.priority  %></td>
+	<td class="issueTitle"><a href="<%= issue.html_url%>"><%= issue.title %></a></td>
+	<td class="point">
+	  <select name="point" id="issuePoint" class="pointClass" data-pbl="<%=issue.number %>">
+	    <% 
+	       var points = ['1','2','3','5','8','13','20','?'];
+	       points.forEach(function (p) {
+	     %>
+	    <option value="<%=p%>" <%= p==issue.point? 'selected':''%>><%=p%></option>
+	    <%
+	       });
+	     %>
+	  </select>
+	</td>
+	<td class="assignee">
+	  <% if (issue.assignee) { %>
+	  <img src="<%= issue.assignee.avatar_url %>">
+	  <span><%= issue.assignee.login %></span>
+	  <% } else { %>
+	  <img src="/img/notassigned.png">
+	  <span>not assigned</span>
+	  <% } %>
+      <button type="submit" value="#" class="getTask btn btn-primary">対応</button>
+	</td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
 </div>
 
 <% include footer %>
