@@ -42,7 +42,7 @@ function callGithubAPI(path, accessToken, callback) {
 
 exports.index = function(req, res) {
   var username = req.session.passport.user.username;
-  var accessToken = session.accessToken;
+  var accessToken = req.session.accessToken;
 
   v.waterfall([
     // ユーザの所属してるorgをすべて取得
@@ -68,7 +68,7 @@ exports.index = function(req, res) {
 
 exports.new = function(req, res) {
     var username = req.session.passport.user.username;
-    var accessToken = session.accessToken;
+    var accessToken = req.session.accessToken;
 
     v.waterfall([
         // userに紐づいているorganizationの一覧の取得
@@ -78,15 +78,12 @@ exports.new = function(req, res) {
         // organizationに紐づいているリポジトリ取得
         function(org, callback) {
             for (var i = 0; i < org.length; i++) {
-                console.log(org[i].login);
                 callGithubAPI('/orgs/' + org[i].login + '/repos', accessToken, callback);
             }
         }
     ], function(err, repos) {
         if (err) console.log('error = ' + err);
         res.render('project-new', { 'repos' : repos });
-        console.log('repos = ');
-        console.log(repos);
     });
 };
 
@@ -101,7 +98,7 @@ exports.create = function(req, res) {
     if (projects.length === 0) {
       var project = new Project({'orgname': orgname, 'reponame': reponame});
       project.save(function(err) {
-          console.log(err);
+          if (err) console.log(err);
       });
 
       res.render('project-created', { 'name' : reponame });
