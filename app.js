@@ -70,7 +70,7 @@ app.configure('development', function(){
 app.get('/', routes.index);
 app.get('/users', user.list);
 //認証実行
-app.get('/auth/github',passport.authenticate('github') , auth.github);
+app.get('/auth/github',passport.authenticate('github', {scope: ['user','public_repo','repo','repo:status','notifications','gist']}) , auth.github);
 //OAuthコールバック
 app.get('/auth/github/callback',
         passport.authenticate('github', { failureRedirect: '/login' }),
