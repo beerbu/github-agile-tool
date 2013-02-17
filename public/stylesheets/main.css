@@ -58,10 +58,11 @@
     background: #fff;
     border-radius: 0; }
 #issueList .getTask {
+  display: block;
   padding: 3px 5px;
   width: 40px;
   position: absolute;
-  right: -52px;
+  right: -41px;
   top: 3px;
   border-radius: 0 3px 3px 0;
   border-left: none;
