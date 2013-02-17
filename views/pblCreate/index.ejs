@@ -1,0 +1,14 @@
+<p>登録</p>
+<form action="/pblCreate/save" method="post">
+  <input type="text" name="title"><br>
+  <select>
+    <% for(var i in assign) { %>
+    <option><%= assign[i].name %></option>
+    <% } %>
+  </select>
+  <br>
+  <textarea name="body"></textarea><br>
+  <input type="hidden" value="<%= project %>" name="project">
+  <input type="submit" value="おk">
+</form>
+

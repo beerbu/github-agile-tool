@@ -9,6 +9,7 @@ var express = require('express')
   , auth = require('./routes/auth')
   , pblList = require('./routes/pblList')
   , project = require('./routes/project')
+  , pblCreate = require('./routes/pblCreate')
   , http = require('http')
   , path = require('path');
 
@@ -85,6 +86,9 @@ app.get('/projects', auth.useAuth, project.index);
 // app.get('/projects/:name', project.loadProject, project.detail);
 app.get('/projects/new', auth.useAuth, project.new);
 app.post('/projects/new', auth.useAuth, project.create);
+
+app.get('/pblCreate/index/:project', auth.useAuth, pblCreate.index);
+app.post('/pblCreate/save', auth.useAuth, pblCreate.save);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
