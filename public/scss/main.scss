@@ -14,7 +14,7 @@
 /* newIssue ========== */
 #newIssue {
 	margin-top: 20px;
-	
+
 	form {
 		margin-bottom: 0;
 	}
@@ -56,6 +56,7 @@
 		background-image: linear-gradient(to bottom, #F2F2F2, white);
 	}
 	.assignee {
+		position: relative;
 		img {
 			width: 20px;
 			height: 20px;
@@ -72,6 +73,17 @@
 			background: #fff;
 			border-radius: 0;
 		}
+	}
+	.getTask {
+		padding: 3px 5px;
+		width: 40px;
+		position: absolute;
+		right: -52px;
+		top: 3px; 
+		border-radius: 0 3px 3px 0;
+		border-left: none;
+		overflow: hidden;
+
 	}
 }
 
