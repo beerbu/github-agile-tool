@@ -1,7 +1,8 @@
-/* newIssue ========== */
-#newIssue .heading {
+.heading {
   font-size: 20px;
   line-height: 1; }
+
+/* newIssue ========== */
 #newIssue form {
   margin-bottom: 0; }
 #newIssue .titleWr {
@@ -41,3 +42,7 @@
     border: none;
     background: #fff;
     border-radius: 0; }
+
+/* #newProject */
+#newProject select {
+  margin-bottom: 0; }

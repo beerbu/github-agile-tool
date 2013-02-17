@@ -1,9 +1,9 @@
 <p>登録</p>
 <form action="/pblCreate/save" method="post">
   <input type="text" name="title"><br>
-  <select>
+  <select name="assign">
     <% for(var i in assign) { %>
-    <option><%= assign[i].name %></option>
+    <option value="<%= assign[i].name %>"><%= assign[i].name %></option>
     <% } %>
   </select>
   <br>

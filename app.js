@@ -10,6 +10,7 @@ var express = require('express')
   , pblList = require('./routes/pblList')
   , project = require('./routes/project')
   , pblCreate = require('./routes/pblCreate')
+  , burndown = require('./routes/burndown')
   , http = require('http')
   , path = require('path');
 
@@ -99,6 +100,9 @@ app.post('/projects/new', auth.useAuth, project.create);
 
 app.get('/pblCreate/index/:project', auth.useAuth, pblCreate.index);
 app.post('/pblCreate/save', auth.useAuth, pblCreate.save);
+
+app.get('/burndown', auth.useAuth, burndown.graph);
+app.get('/burndownCreate', auth.useAuth, burndown.createBurndownMock);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
