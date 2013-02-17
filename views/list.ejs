@@ -63,7 +63,7 @@ var currentProject = '<%= project%>';
       <% issues.forEach(function(issue) { %>
       <tr data-pbl="<%=issue.number %>">
 	<td class="priority"><%= issue.priority  %></td>
-	<td class="issueTitle"><%= issue.title %></td>
+	<td class="issueTitle"><a href="<%= issue.html_url%>"><%= issue.title %></a></td>
 	<td class="point">
 	  <select name="point" id="issuePoint" class="pointClass" data-pbl="<%=issue.number %>">
 	    <% 
