@@ -8,28 +8,15 @@
     <link rel='stylesheet' href='/stylesheets/main.css' type='text/css'>
     <script type="text/javascript" src='/js/jquery-1.9.1.min.js'></script>
     <script type="text/javascript" src='/js/jquery-ui-1.10.1.custom.min.js'></script>
-    <script type="text/javascript" src="./js/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.tablesorter.min.js"></script>
     <script type="text/javascript" src='/js/bootstrap.js'></script>
-    <script type='text/javascript'>
-      !function () {
-        window.console = ('console' in window) ? console : {
-          log: function () {}
-        }
-        var one = 'one'
-          , two = 'two'
-          , three = function (msg) {
-            console.log(msg)
-          }
-        console.log([one, two].join(' '))
-        three('hello there sir')
-      }()
-    </script>
+    <script type="text/javascript" src='/js/common.js'></script>
   </head>
   <body>
   <div class="container">
     <header class="navbar navbar-fixed-top">
       <div class="navbar-inner">
-      <p class="brand">Ajilehub</p>
+      <p class="brand">Agilehub</p>
       <ul class="nav">
         <li>
 <% if(locals.login) { %>
@@ -42,7 +29,7 @@
     </header>
 
       <div id="projectTitle">
-        <h1>Github-ajile-tool</h1>
+        <h1>Github-agile-tool</h1>
           <nav>
             <ul class="navTab">
               <li class="crr"><a href="#">PBL</a></li>
