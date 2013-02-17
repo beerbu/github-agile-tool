@@ -29,8 +29,8 @@ exports.graph = function(req, res) {
                 verocity.push(data);
             }
 
-            res.render('graph', {burndown:burndown, velocity:verocity, login:req.session.passport,
-                                 user:user,project:project});
+            res.render('graph', {burndown: burndown, velocity: verocity, login: req.session.passport,
+                                 user: user, project: project, title: 'バーンダウン'});
         });
     });
 };
@@ -43,16 +43,16 @@ exports.createMock = function(req, res) {
     setTimeout(function() {
         var sumOpened = [250,200,180,200,140,120,100];
         var sumClosed = [0,  50 ,70 ,80 ,140,165,185];
-        for(var i=0;i<6;i++) {	
-	    var iteration = i;
+        for(var i=0;i<6;i++) {
+            var iteration = i;
             var data = {'project':project, 'iteration':iteration, 'point':sumOpened[i], 'type':'burndown'};
             var burndown = new Burndown(data);
             burndown.save(function(err){
                 console.log(err);
             });
         }
-        for(var i=0;i<6;i++) {	
-	    var iteration = i;
+        for(var i=0;i<6;i++) {
+            var iteration = i;
             var data = {'project':project, 'iteration':iteration, 'point':sumClosed[i], 'type':'sumClosed'};
             var burndown = new Burndown(data);
             burndown.save(function(err){
@@ -61,14 +61,14 @@ exports.createMock = function(req, res) {
         }
         res.end('ok');
     }, 1000);
-}
+};
 
 exports.removeAll = function(req, res) {
     var project = 'github-agile-tool';
     var q = Burndown.remove({project:project});
     q.exec();
     res.redirect('/burndownCreate');
-}
+};
 
 exports.batch = function(req, res) {
     var token = req.session.accessToken;
@@ -99,9 +99,9 @@ exports.batch = function(req, res) {
                                     issue.point = pbl? pbl.point:'?';
                                     if(issue.point != '?') {
                                         if(issue.state == 'open') {
-                                            sumPoint += parseInt(issue.point);
+                                            sumPoint += parseInt(issue.point, 10);
                                         } else {
-                                            sumClosedPoint += parseInt(issue.point);
+                                            sumClosedPoint += parseInt(issue.point, 10);
                                         }
                                     }
                                 });
@@ -123,4 +123,4 @@ exports.batch = function(req, res) {
                             });
                         });
             });
-}
+};

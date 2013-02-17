@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <p>着手！</p>
-    <p>ブランチ<a href="http://github.com/<%= username %>/<%= reponame %>/tree/<%= branchname %>">'<%= username %>/<%= reponame %>/tree/<%= branchname %>'</a>が作成されました。</p>
+<% include header %>
+
+<h2><%= title %></h2>
+
+    <p>ブランチ<a href="http://github.com/<%= username %>/<%= reponame %>/tree/<%= branchname %>">'<%= username %>/<%= reponame %>/tree/<%= branchname %>'</a>が作成され、カンバンのステータスが着手中になりました。</p>
+    <p>ローカルリポジトリでgit pullし、作業を開始してください。</p>
     <a href="/<%= orgname %>/<%= reponame %>/kanban/">カンバン一覧へ</a>
-  </body>
-</html>
+
+<% include footer %>

@@ -108,14 +108,17 @@ exports.index = function(req, res) {
       }
 
       for (var i = 0; i < kanbans.length; i++) {
+        function clojure(username) {
+          return function (err, pbls) {
+            if (err) console.log(err);
+            var result = {'username': username, 'pbls': pbls};
+            console.log(result);
+            reduce(result);
+          };
+        }
         var kanban = kanbans[i];
         var condition = {'username': orgname, 'reponame': reponame, 'issueId': {$in: kanban.issueid}};
-        Pbl.find(condition, function(err, pbls) {
-          if (err) console.log(err);
-
-          var result = {'username': kanban.username, 'pbls': pbls};
-          reduce(result);
-        });
+        Pbl.find(condition, clojure(kanban.username));
       }
     }
   ], function(err, kanbans, pbls) {
@@ -197,7 +200,7 @@ exports.create = function(req, res) {
     if (err) console.log('err = ' + err);
     console.log('result = ');
     console.log(result);
-    res.render('kanban-created', {'orgname': orgname, 'reponame': reponame, 'username': username, 'branchname': branchname});
+    res.render('kanban-created', {'orgname': orgname, 'reponame': reponame, 'username': username, 'branchname': branchname, 'title': '作業開始', 'login': req.session.passport });
   });
 };
 
