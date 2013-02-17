@@ -102,6 +102,7 @@ app.post('/pblCreate/save', auth.useAuth, pblCreate.save);
 
 app.get('/burndown', auth.useAuth, burndown.graph);
 app.get('/burndownCreate', auth.useAuth, burndown.createBurndownMock);
+app.get('/burndownRemove', auth.useAuth, burndown.removeAll);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

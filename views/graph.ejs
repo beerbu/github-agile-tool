@@ -4,4 +4,10 @@
 
 </div>
 
-<p>とりあえずscriptタグ内にグラフに使うデータをjson形式で出しとく</p>
+<script type="text/javascript">
+var burndown = <%= burndown %>,
+    velocity = <%= velocity %>;
+</script>
+<script type="text/javascript" src='/js/graph.js'></script>
+
+<% include footer %>

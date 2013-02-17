@@ -50,8 +50,8 @@
 	}
 	.active {
 		background-image: -webkit-linear-gradient(top, #F2F2F2, white);
-background-image: -o-linear-gradient(top, #F2F2F2, white);
-background-image: linear-gradient(to bottom, #F2F2F2, white);
+		background-image: -o-linear-gradient(top, #F2F2F2, white);
+		background-image: linear-gradient(to bottom, #F2F2F2, white);
 	}
 	.assignee {
 		img {
@@ -83,9 +83,9 @@ background-image: linear-gradient(to bottom, #F2F2F2, white);
 
 /* #graph ========= */
 #graph {
-	width: 700px;
-	height: 700px;
-	margin: auto;
-	border: 1px solid #ccc;
+	width: 900px;
+	height: 500px;
+	margin: 10px auto;
+	padding-top: 10px;
 }
 
