@@ -8,7 +8,7 @@ var db = require('../db');
 
 var Schema = mongoose.Schema;
 var Project = new Schema({
-    username  : String,
+    orgname  : String,
     reponame  : String
 });
 
