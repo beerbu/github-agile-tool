@@ -100,7 +100,7 @@ app.post('/projects/new', auth.useAuth, project.create);
 app.get('/pblCreate/index/:project', auth.useAuth, pblCreate.index);
 app.post('/pblCreate/save', auth.useAuth, pblCreate.save);
 
-app.get('/burndown', auth.useAuth, burndown.graph);
+app.get('/:user/:project/burndown', auth.useAuth, burndown.graph);
 app.get('/burndownCreate', auth.useAuth, burndown.createBurndownMock);
 app.get('/burndownRemove', auth.useAuth, burndown.removeAll);
 
