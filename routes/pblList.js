@@ -28,12 +28,14 @@ exports.list = function(req, res){
                     issues.sort(function(a,b) {
                         return a.priority > b.priority ? 1: -1;
                     });
+
                     var iterating = false
                     if (project == 'github-agile-tool') {
                         iterating = true;
                     }
+
                     res.render('list', {title:"List", 'login': req.session.passport, issues:issues,
-                                       user:user,project:project, iterating:iterating});
+                                       user:user,project:project, loginuser:req.session.passport.user.username, iterating:iterating});
                 });
             });
 };

@@ -117,7 +117,7 @@ var currentProject = '<%= project%>';
 	  <img src="/img/notassigned.png">
 	  <span>not assigned</span>
 	  <% } %>
-      <% if(issue.assignee && issue.assignee.login == user) { %>
+      <% if(issue.assignee && issue.assignee.login == loginuser) { %>
       <form action="/<%= user %>/<%= project %>/kanban/new" method="post" style="display:inline">
           <input type="hidden" value="<%= issue.number %>" name="issueid">
           <input type="hidden" value="develop" name="branchname">
