@@ -17,14 +17,16 @@ exports.list = function(req, res){
                     issues.forEach(function(issue) {
                         var pbl = null;
                         pbls.forEach(function(p) {
-                            if(p.id == issue.number)
+                            if(p.issueId == issue.number)
                                 pbl = p;
                         });
+
                         issue.priority = pbl? pbl.priority:1000;
                         issue.point = pbl? pbl.point:'?';
                     });
 console.log(                    req.session.passport);
-                    res.render('list', {title:"List", 'login': req.session.passport, issues:issues});
+                    res.render('list', {title:"List", 'login': req.session.passport, issues:issues,
+                                       user:user,project:project});
                 });
             });
 };
@@ -33,8 +35,9 @@ exports.setIssue = function(req, res) {
     var user = req.params.user;
     var project = req.params.project;
     var id = req.params.id;
-    var point = req.query.point;
-    var priority = req.query.priority;
+    var point = req.body.point;
+console.log('point'+point);
+    var priority = req.body.priority;
     Pbl.findOne({'username': user, 'reponame':project, 'issueId':id}, function(err, issue) {
         if (err) console.log(err);
         if(!issue) {
@@ -42,9 +45,15 @@ exports.setIssue = function(req, res) {
             issue.username = user;
             issue.reponame = project;
             issue.issueId = id;
+            issues.point = '?';
+            issue.priority = 9999;
         }
-        issue.point = point? point: "?";
-        issue.priority = priority? priority: 100;
+        if (point) {
+            issue.point = point;
+        }
+        if(priority) {
+            issue.priority = priority;
+        }
         issue.save(function(err) {
             if (err) console.log(err);
             res.end("done");
