@@ -2,7 +2,7 @@ exports.index = function(req, res) {
     var project = req.params.project;
     assign = [{name:'nakaji-dayo'}, {name:'akiomik'}, {name:'hiraya'}, {name:'servek'}];
 	
-    res.render('pblCreate/index', {project:project, assign:assign});
+    res.render('pblCreate/index', {project:project, assign:assign, login:req.session.passport});
 };
 
 exports.save = function(req, res) {

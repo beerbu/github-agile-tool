@@ -64,7 +64,7 @@ app.configure(function(){
       , store: new RedisStore({db: 1, prefix: 'session:'})
       }
   ));
-    
+
   app.use(passport.initialize());
   app.use(passport.session());
 
@@ -88,12 +88,13 @@ app.get('/auth/github/callback',
 app.get('/auth/account', auth.useAuth, auth.account);
 
 //pbl一覧
-app.get('/pbl', auth.useAuth, pblList.list);
+app.get('/:user/:project/pbl', auth.useAuth, pblList.list);
+//pbl更新
+app.post('/:user/:project/pbl/:id', auth.useAuth, pblList.setIssue);
 
 // project
 app.get('/projects', auth.useAuth, project.index);
 // app.get('/projects/:name', project.loadProject, project.detail);
-app.get('/projects/new', auth.useAuth, project.new);
 app.post('/projects/new', auth.useAuth, project.create);
 
 app.get('/pblCreate/index/:project', auth.useAuth, pblCreate.index);

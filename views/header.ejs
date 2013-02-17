@@ -8,36 +8,28 @@
     <link rel='stylesheet' href='/stylesheets/main.css' type='text/css'>
     <script type="text/javascript" src='/js/jquery-1.9.1.min.js'></script>
     <script type="text/javascript" src='/js/jquery-ui-1.10.1.custom.min.js'></script>
-    <script type="text/javascript" src="./js/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.tablesorter.min.js"></script>
     <script type="text/javascript" src='/js/bootstrap.js'></script>
-    <script type='text/javascript'>
-      !function () {
-        window.console = ('console' in window) ? console : {
-          log: function () {}
-        }
-        var one = 'one'
-          , two = 'two'
-          , three = function (msg) {
-            console.log(msg)
-          }
-        console.log([one, two].join(' '))
-        three('hello there sir')
-      }()
-    </script>
+    <script type="text/javascript" src='/js/common.js'></script>
   </head>
   <body>
   <div class="container">
     <header class="navbar navbar-fixed-top">
       <div class="navbar-inner">
-      <p class="brand">Ajilehub</p>
+      <p class="brand">Agilehub</p>
       <ul class="nav">
-        <li><a href="#"><img src="https://secure.gravatar.com/avatar/345c13e732b218fc5496d8b50ebeaa9b?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" alt="hiraya">hiraya</a></li>
+        <li>
+<% if(locals.login) { %>
+  <a href="#"><img src="<%=login.user._json.avatar_url%>" alt="avater"><%= login.user.username %></a></li>
+<% } else { %>
+  <a href="/auth/github">login</a></ul>
+<% } %>
       </ul>
     </div>
     </header>
 
       <div id="projectTitle">
-        <h1>Github-ajile-tool</h1>
+        <h1>Github-agile-tool</h1>
           <nav>
             <ul class="navTab">
               <li class="crr"><a href="#">PBL</a></li>

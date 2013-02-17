@@ -73,10 +73,19 @@ background-image: linear-gradient(to bottom, #F2F2F2, white);
 	}
 }
 
-
-/* #newProject */
+/* #newProject ========== */
 #newProject {
 	select {
 		margin-bottom: 0;
 	}
 }
+
+
+/* #graph ========= */
+#graph {
+	width: 700px;
+	height: 700px;
+	margin: auto;
+	border: 1px solid #ccc;
+}
+

@@ -3,24 +3,16 @@
  * project controller
  */
 var https = require('https');
+var v = require('valentine');
+var async = require('async');
 var Project = require('../models/project.js');
+var session = require('passport').session;
 
-exports.index = function(req, res) {
-  var username = req.session.passport.user.username;
-  Project.find({'username': username}, function(err, projects) {
-    if (err) console.log(err);
-
-    res.render('project-index', { 'projects' : projects });
-  });
-};
-
-exports.new = function(req, res) {
-    var username = req.session.passport.user.username;
-    var accessToken = req.session.passport.user.accessToken;
-    var getAllUserRepos = {
+function callGithubAPI(path, accessToken, callback) {
+    var options = {
         host: 'api.github.com',
         port: '443',
-        path: '/users/' + username + '/repos',
+        path: path,
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -28,7 +20,7 @@ exports.new = function(req, res) {
         }
     };
 
-    var request = https.request(getAllUserRepos, function(result) {
+    var request = https.request(options, function(result) {
         var output = '';
         result.setEncoding('utf8');
 
@@ -37,32 +29,89 @@ exports.new = function(req, res) {
         });
 
         result.on('end', function() {
-            var repos = JSON.parse(output);
-            res.render('project-new', { 'repos' : repos });
+            var obj = JSON.parse(output);
+            callback(null, obj);
         });
     });
 
     request.on('error', function(err) {
-        console.log(err);
+        callback(err);
     });
 
     request.end();
+}
+
+exports.index = function(req, res) {
+  var username = req.session.passport.user.username;
+  var accessToken = req.session.accessToken;
+
+  async.series([
+      function (callback) {
+          v.waterfall([
+            // new 機能
+            // userに紐づいているorganizationの一覧の取得
+            function(callback) {
+                callGithubAPI('/user/orgs', accessToken, callback);
+            },
+            // organizationに紐づいているリポジトリ取得
+            function(org, callback) {
+                for (var i = 0; i < org.length; i++) {
+                    callGithubAPI('/orgs/' + org[i].login + '/repos', accessToken, callback);
+                }
+            }
+          ], function (err, projects) {
+            // res.render('project-index', { 'projects' : projects });
+            callback(null, projects);
+          });
+      },
+      function (callback) {
+        v.waterfall([
+          // list機能
+          // ユーザの所属してるorgをすべて取得
+          function (callback, repos) {
+            callGithubAPI('/user/orgs', accessToken, callback);
+          },
+          //orgのプロジェクト一覧を取得
+          function (orgs, callback) {
+            var orgnames = new Array(orgs.length);
+            for (var i = 0; i < orgs.length; i++) {
+              orgnames[i] = orgs[i].login;
+            }
+
+            Project.find({'orgname': {$in: orgnames}}, function(err, projects) {
+                if (err) callback(err);
+                callback(null, projects);
+            });
+          }
+          ], function(err, repos) {
+            if (err) console.log('error = ' + err);
+            // res.render('project-new', { 'repos' : repos });
+            callback(null, repos);
+          }
+        );
+      }
+    ], function (err, results) {
+        if (err) console.log(err);
+        res.render('project-index', { 'title': 'プロジェクト管理', 'projects' : results[1], 'repos': results[0], login:req.session.passport} );
+      }
+    );
 };
 
 exports.create = function(req, res) {
-  var username = req.session.passport.user.username;
-  var reponame = req.body.reponame;
+  var params = req.body.reponame.split('/');
+  var orgname = params[0];
+  var reponame = params[1];
 
-  Project.find({'username': username, 'reponame': reponame}, function(err, projects) {
+  Project.find({'orgname': orgname, 'reponame': reponame}, function(err, projects) {
     if (err) console.log(err);
 
     if (projects.length === 0) {
-      var project = new Project({'username': username, 'reponame': reponame});
+      var project = new Project({'orgname': orgname, 'reponame': reponame});
       project.save(function(err) {
-          console.log(err);
+          if (err) console.log(err);
       });
 
-      res.render('project-created', { 'name' : reponame });
+      res.render('project-created', { 'name' : reponame, login:req.session.passport });
     }
     else {
       res.redirect('/projects');

@@ -14,7 +14,9 @@
     "mongoose": "3.5.6",
     "mongodb": "1.2.12",
     "superagent": "0.12.4",
-    "connect-redis": "1.4.5"
+    "connect-redis": "1.4.5",
+    "async": "0.2.5",
+    "valentine": "1.5.5"
   },
   "readmeFilename": "README.md",
   "description": "github-agile-tool =================",

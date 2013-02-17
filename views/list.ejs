@@ -51,6 +51,7 @@
 		<thead>
 			<tr>
 				<th class="span1 priority active">Priority</th>
+				<th>id</th>
 				<th class="span7">Title</th>
 				<th class="span1">Point</th>
 				<th class="span3">Assign</th>
@@ -60,6 +61,7 @@
 			<% issues.forEach(function(issue) { %>
 			<tr>
 				<td class="priority">1:<%= issue.priority  %></td>
+				<td><%= issue.number %></td>
 				<td class="issueTitle"><%= issue.title %></td>
 				<td class="point">
 					<select name="point" id="issuePoint">
@@ -87,49 +89,5 @@
 		</tbody>
 	</table>
 </div>
-
-
-
-
-<script type="text/javascript">
-	
-	$(function () {
-		function assign() {
-			$('.cancel').click(function (){
-				$('#assign .name').text('Assign').parent().removeClass('btn-info')
-			})
-			$('#assign input[type="radio"]').bind('click', function (){
-				var selectedName = $(this).val(),
-					btnText = $('#assign .name').text(selectedName);
-				$(btnText).text(selectedName).parent().addClass('btn-info');
-			})
-		};
-		// 1行目クリックで並べ替えを可能にする
-		$('#issueTable').tablesorter({
-			sortlist:[[0,0]]
-		});
-		// 1行目のクリックされたセルをアクティブ表示にする
-		$('#issueTable th').click(function (){
-			var elm = $(this),
-				others = $(elm).siblings();
-				$(elm).addClass('active');
-				$(others).removeClass('active');
-		})
-
-		function sortable() {
-			if ( $('#issueTable th.priority').hasClass('active') ) {
-				$('#sortable').sortable().disableSelection();
-				$('#sortable').bind('sortstop', function (e, ui) {   // ソートが完了したら実行される。
- 					var rows = $('#sortable .priority');
-					for (var i = 0, n = rows.length; i < n; i += 1) {
-    					$($(rows)[i]).text(i + 1);
-    				}
-				});
-			}
-		};
-		assign();
-		sortable();
-	});
-</script>
 
 <% include footer %>

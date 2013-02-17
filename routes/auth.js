@@ -10,7 +10,7 @@ exports.callback = function(req, res) {
 exports.account = function(req, res) {
     console.log(req.session);
     var session = require('passport').session;
-    res.render('account',{title:'account info', session: session});
+    res.render('account',{title:'account info', login:req.session.passport, session: session});
 }
 
 //認証ありページのミドルウェア

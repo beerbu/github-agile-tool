@@ -13,7 +13,7 @@ exports.graph = function(req, res) {
             console.log(data);
             dummy.push(JSON.stringify(data));
         }
-        res.render('graph', {burndown:dummy, velocity:dummy2});
+        res.render('graph', {burndown:dummy, velocity:dummy2, login:req.session.passport});
     });
 };
 
