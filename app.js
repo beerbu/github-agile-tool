@@ -11,6 +11,7 @@ var express = require('express')
   , project = require('./routes/project')
   , pblCreate = require('./routes/pblCreate')
   , burndown = require('./routes/burndown')
+  , kanban = require('./routes/kanban')
   , http = require('http')
   , path = require('path');
 
@@ -108,6 +109,11 @@ app.get('/:user/:project/batch/exec', auth.useAuth, burndown.batch);
 //for demo
 app.get('/demo/graph', auth.useAuth, burndown.createMock);
 
+
+// kanban
+app.get('/:orgname/:reponame/kanban', kanban.index);
+app.get('/:orgname/:reponame/kanban/new', kanban.new);
+app.post('/:orgname/:reponame/kanban/new', kanban.create);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

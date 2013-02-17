@@ -11,10 +11,29 @@
 	line-height: 1;
 
 }
+/* sprintSetting ========== */
+#sprintSetting {
+	margin-top: 20px;
+
+	#sprintTerm {
+		.btn {
+			border-radius: 0 4px 4px 0;
+		}
+		.dropdown-toggle {
+			width: 180px;
+			border-radius: 4px 0 0 4px;
+		}
+		.dropdown-menu {
+			input {
+				display: none;
+			}
+		}
+	}
+}
 /* newIssue ========== */
 #newIssue {
 	margin-top: 20px;
-	
+
 	form {
 		margin-bottom: 0;
 	}
@@ -56,6 +75,7 @@
 		background-image: linear-gradient(to bottom, #F2F2F2, white);
 	}
 	.assignee {
+		position: relative;
 		img {
 			width: 20px;
 			height: 20px;
@@ -72,6 +92,18 @@
 			background: #fff;
 			border-radius: 0;
 		}
+	}
+	.getTask {
+		display: block;
+		padding: 3px 5px;
+		width: 40px;
+		position: absolute;
+		right: -41px;
+		top: 3px; 
+		border-radius: 0 3px 3px 0;
+		border-left: none;
+		overflow: hidden;
+
 	}
 }
 

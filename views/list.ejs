@@ -4,7 +4,36 @@
 var currentUser = '<%= user%>';
 var currentProject = '<%= project%>';
 </script>
-
+<div id="sprintSetting" class="alert alert-info">
+    <p><strong>イテレーションが開始されていません。</strong></p>
+    <p>1イテレーションの長さを選択して、イテレーションを開始して下さい。</p>
+    <form action="">
+        <fieldset>
+            <div id="sprintTerm" class="btn-group">
+                <button class="btn dropdown-toggle btn-primary btn-large" data-toggle="dropdown"><span class="btnText">イテレーション</span> <span class="caret"></span></button>
+                <button class="btn btn-primary btn-large">開始</button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="#"><label>
+                      <input type="radio" name="term" value="1">1 week</label></a>
+                    </li>
+                    <li>
+                      <a href="#"><label>
+                      <input type="radio" name="term" value="2">2 week</label></a>
+                    </li>
+                    <li>
+                      <a href="#"><label>
+                      <input type="radio" name="term" value="3">3 week</label></a>
+                    </li>
+                    <li>
+                      <a href="#"><label>
+                      <input type="radio" name="term" value="4">4 week</label></a>
+                    </li>
+                  </ul>
+                </div>
+        </fieldset>
+    </form>
+</div>
 <div id="newIssue" class="well well-small">
   <h3 class="heading">新規PBL作成</h3>
   <form action="/pblCreate/save" method="post">
@@ -56,9 +85,9 @@ var currentProject = '<%= project%>';
     <thead>
       <tr>
 	<th class="span1 priority active">Priority</th>
-	<th class="span7">Title</th>
+	<th class="span8">Title</th>
 	<th class="span1">Point</th>
-	<th class="span3">Assign</th>
+	<th class="span2">Assign</th>
       </tr>
     </thead>
     <tbody id="sortable" class="pblClass">
@@ -86,6 +115,13 @@ var currentProject = '<%= project%>';
 	  <img src="/img/notassigned.png">
 	  <span>not assigned</span>
 	  <% } %>
+      <% if(issue.assignee && issue.assignee.login == user) { %>
+      <form action="/<%= user %>/<%= project %>/kanban/new" method="post" style="display:inline">
+          <input type="hidden" value="<%= issue.number %>" name="issueid">
+          <input type="hidden" value="develop" name="branchname">
+		  <button type="submit" class="getTask btn btn-primary">対応</button>
+      </form>
+      <% } %>
 	</td>
       </tr>
       <% }); %>

@@ -1,0 +1,21 @@
+<% include header %>
+
+<h2><%= title %></h2>
+
+<div class="well well-small">
+    <h3 class="heading">カンバン一覧</h3>
+    <ul>
+      <% for(var i = 0; i < kanbans.length; i++) {%>
+        <p>ユーザ名: <%= kanbans[i].username %></p>
+        <% if (kanbans[i].issues.length) {%>
+            <% for (var j = 0; j < kanbans[i].issues.length; j++) {%>
+              <p><a href="http://github.com/<%= kanbans[i].orgname %>/<%= kanbans[i].reponame %>/issues/<%= kanbans[i].issues[j].issueId %>">着手中PBL: <%= kanbans[i].issues[j].issueId %></a></p>
+            <% } %>
+        <% } else {%>
+            <p>未着手</p>
+        <% } %>
+      <% } %>
+    </ul>
+</div>
+
+<% include footer %>
