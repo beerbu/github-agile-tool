@@ -1,0 +1,14 @@
+<div>
+    <form method="POST" action="/<%= orgname %>/<%= reponame %>/kanban/new">
+        <h1>STOP! STOP! STOP!</h1>
+        <h2>This is stab!!!</h2>
+        <p>form元ブランチ</p>
+        <input name="branchname" value="<%= branchname %>">
+        <select name="issueid">
+            <% for (var i = 0; i < pbls.length; i++) { %>
+                <option value="<%= pbls[i].issueid %>"><%= pbls[i].issuetitle %></option>
+            <% } %>
+        </select>
+        <input type="submit" value="着手">
+    </form>
+</div>

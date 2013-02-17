@@ -41,15 +41,47 @@ function callGithubAPI(path, accessToken, callback) {
 
     request.end();
 }
+function postGithubAPI(path, data, accessToken, callback) {
+  var postStr = JSON.stringify(data);
+  var options = {
+    host: 'api.github.com',
+    port: '443',
+    path: path,
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+      'Content-Length': postStr.length,
+      'Authorization': 'bearer ' + accessToken
+      }
+  };
+
+  var request = https.request(options, function(response) {
+    var responseString = '';
+    response.setEncoding('utf8');
+
+    response.on('data', function (chunk) {
+      responseString += chunk;
+    });
+
+    response.on('end', function() {
+      var obj = JSON.parse(responseString);
+      callback(null, obj);
+    });
+  });
+
+  request.on('error', function(err) {
+    callback(err);
+  });
+
+  request.write(postStr);
+  request.end();
+}
 
 exports.index = function(req, res) {
   var username = req.session.passport.user.username;
   var accessToken = req.session.accessToken;
   var orgname = req.params.orgname;
   var reponame = req.params.reponame;
-
-  console.log('orgname = ' + orgname);
-  console.log('reponame = ' + reponame);
 
   v.waterfall([
     // mongoからkanban一覧を出す
@@ -93,22 +125,55 @@ exports.index = function(req, res) {
 exports.new = function(req, res) {
   var username = req.session.passport.user.username;
   var accessToken = req.session.accessToken;
-  var orgname = req.params.user;
-  var reponame = req.params.project;
+  var orgname = req.params.orgname;
+  var reponame = req.params.reponame;
 
   var branchname = 'master';
   var path = '/repos/' + orgname + '/' + reponame + '/git/refs/heads/' + branchname;
 
-  // issue一覧
+
+  // TODO! this is mock
+  var pbls = new Array({'orgname': orgname, 'reponame': reponame, 'username': username, 'issueid': 666, 'issuetitle': 'スタブissue'});
+  res.render('kanban-new', {'pbls': pbls, 'orgname': orgname, 'reponame': reponame, 'branchname': branchname});
+};
+
+exports.create = function(req, res) {
+  var username = req.session.passport.user.username;
+  var accessToken = req.session.accessToken;
+  var orgname = req.params.orgname;
+  var reponame = req.params.reponame;
+
+  var origBranch = req.body.branchname;
+  var issueid = req.body.issueid;
+  var branchname = 'pbl/issue-' + issueid;
+
+  console.log('origBranch = ' + origBranch);
+  console.log('issueid = ' + issueid);
+
   v.waterfall([
+    // form元ブランちのrefを取得
     function (callback) {
-    },
-    function (callback) {
+      var path = '/repos/' + orgname + '/' + reponame + '/git/refs/heads/' + origBranch;
+      console.log('path = ' + path);
       callGithubAPI(path, accessToken, callback);
     },
+    function (ref, callback) {
+      console.log('ref = ');
+      console.log(ref);
+      var path = '/repos/' + username + '/' + reponame + '/git/refs';
+      console.log('path = ' + path);
+      var data = {'ref': 'refs/heads/' + branchname, 'sha': ref.object.sha};
+      console.log('data = ');
+      console.log(data);
+      postGithubAPI(path, data, accessToken, callback);
+    }
   ], function (err, results) {
     if (err) console.log('err = ' + err);
-    console.log('result = ' + results);
+    console.log('results = ');
+    console.log(results);
   });
+
+  // TODO! this is mock
+  res.render('kanban-created', {'orgname': orgname, 'reponame': reponame, 'username': username, 'branchname': branchname});
 };
 

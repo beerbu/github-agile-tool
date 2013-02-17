@@ -106,7 +106,8 @@ app.get('/burndownCreate', auth.useAuth, burndown.createBurndownMock);
 
 // kanban
 app.get('/:orgname/:reponame/kanban', kanban.index);
-app.get('/:orgname/:reponame/kanban', kanban.new);
+app.get('/:orgname/:reponame/kanban/new', kanban.new);
+app.post('/:orgname/:reponame/kanban/new', kanban.create);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
