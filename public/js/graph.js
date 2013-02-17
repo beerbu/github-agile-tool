@@ -4,6 +4,7 @@ $(function advanced_titles(container){
     ticks_X = [],
     i, graph, options;
 
+    // 縦軸を表示するために、バーンダウンの配列の個数を数えてticksに入れる
     for (i = 0; i < burndown.length + 1 ; i++) {
         ticks_X.push([i]);
     }

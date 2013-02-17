@@ -27,6 +27,7 @@
 
       <div id="newProject" class="well well-small">
         <h2 class="heading">プロジェクト新規作成</h2>
+        <p class="message">プルダウンメニューからリポジトリを選択してプロジェクトを作成して下さい。</p>  
         <form method="post" action="/projects/new">
           <select name="reponame">
             <% for(var i = 0; i < repos.length; i++) {%>
@@ -35,7 +36,6 @@
           </select>
           <button type="submit" class="btn btn-primary">プロジェクトの作成</button>
         </form>
-        <p id="message"></p>
       </div>
     </div>
 
