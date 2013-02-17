@@ -24,7 +24,10 @@ exports.list = function(req, res){
                         issue.priority = pbl? pbl.priority:1000;
                         issue.point = pbl? pbl.point:'?';
                     });
-console.log(                    req.session.passport);
+                    console.log(req.session.passport);
+                    issues.sort(function(a,b) {
+                        return a.priority > b.priority ? 1: -1;
+                    });
                     res.render('list', {title:"List", 'login': req.session.passport, issues:issues,
                                        user:user,project:project});
                 });
@@ -45,7 +48,7 @@ console.log('point'+point);
             issue.username = user;
             issue.reponame = project;
             issue.issueId = id;
-            issues.point = '?';
+            issue.point = '?';
             issue.priority = 9999;
         }
         if (point) {
