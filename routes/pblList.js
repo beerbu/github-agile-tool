@@ -21,7 +21,8 @@ exports.list = function(req, res){
                         issue.priority = pbl? pbl.priority:1000;
                         issue.point = pbl? pbl.point:'?';
                     });
-                    res.render('list', {title:"List", issues:issues});
+console.log(                    req.session.passport);
+                    res.render('list', {title:"List", 'login': req.session.passport, issues:issues});
                 });
             });
 };
