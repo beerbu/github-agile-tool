@@ -3,14 +3,16 @@ var Pbl = require('../models/pbl.js');
 
 exports.list = function(req, res){
     var token = req.session.accessToken;
-    request.get('https://api.github.com/repos/beerbu/github-agile-tool/issues?labels=PBL')
+
+    var user = req.params.user;
+    var project = req.params.project;
+
+    request.get('https://api.github.com/repos/'+user+'/'+project+'/issues?labels=PBL')
             .set('Authorization', 'token ' + token)
             .end(function(httpRes) {
                 console.log(httpRes.text);
                 var issues = JSON.parse(httpRes.text);
 
-                var user = req.params.user;
-                var project = req.params.project;
                 Pbl.find({'username': user, 'reponame':project}, function(err, pbls) {
                     issues.forEach(function(issue) {
                         var pbl = null;

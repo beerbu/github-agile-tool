@@ -32,7 +32,7 @@
       <p class="brand">Ajilehub</p>
       <ul class="nav">
         <li>
-<% if(login) { %>
+<% if(locals.login) { %>
   <a href="#"><img src="<%=login.user._json.avatar_url%>" alt="avater"><%= login.user.username %></a></li>
 <% } else { %>
   <a href="/auth/github">login</a></ul>
