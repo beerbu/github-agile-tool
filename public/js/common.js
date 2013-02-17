@@ -45,4 +45,16 @@ $(function () {
 	//$(others).removeClass('active');
 	// プライオリティがアクティブならsortableを実行する
     //})
+
+	function navCrr() {
+        var url = location.href;
+        if(url.match(/pbl$/)) {
+            $("#pbl").addClass("crr");
+        } else if(url.match(/burndown$/)) {
+            $("#burndown").addClass("crr");
+        }
+    }
+
+	navCrr();
 });
+

@@ -30,13 +30,15 @@
     </div>
     </header>
 
+      <% if(typeof user != "undefined" && typeof project != "undefined") { %>
       <div id="projectTitle">
-        <h1>Github-agile-tool</h1>
+        <h1><%= project %> Github-agile-tool</h1>
           <nav>
-            <ul class="navTab">
-              <li class="crr"><a href="/<%= user%>/<%= project%>/pbl">PBL</a></li>
-              <li><a href="/burndown">BurnDown</a></li>
+            <ul class="navTab" id="navTab">
+              <li id="pbl"><a href="/<%= user%>/<%= project%>/pbl">PBL</a></li>
+              <li id="burndown"><a href="/<%= user%>/<%= project%>/burndown">BurnDown</a></li>
             </ul>
           </nav>
       </div>
+      <% } %>
 
